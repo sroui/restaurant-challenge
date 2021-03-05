@@ -1,29 +1,21 @@
-# README #
+## Coding guidelines ##
+I have followed TDD to create the code for the restaurant challenge and precisely I have followed the bellow points :
 
-This README would normally document whatever steps are necessary to get your application up and running.
+* ### Test only one behavior per test ###
 
-### What is this repository for? ###
+* ### Red-Green- Refactor ###
+We first, write a failed test, then we write a passing implementation, then we refactor both the test and the code.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+```mermaid
+graph TD;
+    A(Failing test)-->B(Writing a passing implementation)
+    B-->C(Refactor);
+    C-->B
+    C-->A;
+```
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* ### The Given/When/Then ###
+Each test method contains three parts indented with an empty line between each part : 
+   > * __Given__ : pre-conditions of a test 
+   > * __When__ : the behavior that a method tests, and I have respected the best practice to test only one behavior per method 
+   > * __Then__ : pos-conditions of our test
