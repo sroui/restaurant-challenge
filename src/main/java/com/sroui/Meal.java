@@ -1,15 +1,19 @@
 package com.sroui;
 
 public class Meal {
+	private final Recipe recipe;
+	private final int servedDishes;
+
+	public Meal(Recipe recipe, int servedDishes) {
+		this.recipe = recipe;
+		this.servedDishes = servedDishes;
+	}
 
 	public int servedDishes() {
-		// TODO Auto-generated method stub
-		return 0;
+		return servedDishes;
 	}
 
 	public int cookingDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		return servedDishes * recipe.getPreparationTimeInMinutes();
 	}
-
 }
