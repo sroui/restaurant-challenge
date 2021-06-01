@@ -1,11 +1,12 @@
 package com.sroui;
 
 import com.sroui.exceptions.UnavailableDishException;
+import com.sroui.stock.exceptions.ItemOutOfStockException;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static com.sroui.stock.StockItem.UNLIMITED_AMOUNT;
 import static org.fest.assertions.Assertions.assertThat;
-import static com.sroui.Restaurant.UNLIMITED_QUANTITY;
 
 /*recipe of Tomato Mozzarella Salad is
      *
@@ -21,23 +22,23 @@ import static com.sroui.Restaurant.UNLIMITED_QUANTITY;
 public class RestaurantTest {
 
     @Test
-    public void shouldReturnStockAmountOfEachIngredient(){
+    public void shouldReturnStockAmountOfEachIngredient() throws ItemOutOfStockException {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "pepper");
 
-        Double ballsMozzarellaAmount = restaurant.getStockQuantityOf("balls Mozzarella");
-        Double tomatoesAmount = restaurant.getStockQuantityOf("tomatoes");
-        Double oliveOilAmount = restaurant.getStockQuantityOf("olive oil");
-        Double pepperAmount = restaurant.getStockQuantityOf("pepper");
+        Double ballsMozzarellaAmount = restaurant.getStockAmountOf("balls Mozzarella");
+        Double tomatoesAmount = restaurant.getStockAmountOf("tomatoes");
+        Double oliveOilAmount = restaurant.getStockAmountOf("olive oil");
+        Double pepperAmount = restaurant.getStockAmountOf("pepper");
 
         assertThat(ballsMozzarellaAmount).isEqualTo(6);
         assertThat(tomatoesAmount).isEqualTo(20);
-        assertThat(oliveOilAmount).isEqualTo(UNLIMITED_QUANTITY);
-        assertThat(pepperAmount).isEqualTo(UNLIMITED_QUANTITY);
+        assertThat(oliveOilAmount).isEqualTo(UNLIMITED_AMOUNT);
+        assertThat(pepperAmount).isEqualTo(UNLIMITED_AMOUNT);
     }
 
     @Test
     public void shouldServeTomatoMozzarellaSalad() throws UnavailableDishException {
-        Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "pepper");
+        Restaurant restaurant = new Restaurant("6 balls Mozzarella", "2 tomatoes", "olive oil", "pepper");
 
         Ticket ticket = restaurant.order("1 Tomato Mozzarella Salad");
         Meal meal = restaurant.retrieveMealFor(ticket);
@@ -60,8 +61,6 @@ public class RestaurantTest {
     }
 // Allowed modification zone ends here
 
-
-
     /**
      * when cooking more than one dish of the same type :
      * first dish takes standard time, subsequents dish have their cooking time halved
@@ -69,7 +68,7 @@ public class RestaurantTest {
      * here : first = 6 ; 2nd = 3 ; 3rd = 3 ; 4th = 3 => 15 minutes
      */
     @Test
-    @Ignore
+    @Ignore("Ignored because I haven't add implementation yet")
     public void shouldCookFasterWhenDoingMultipleInstanceOfTheSameDish() throws UnavailableDishException {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "sea salt");
         Ticket ticket = restaurant.order("4 Tomato Mozzarella Salad");
@@ -77,7 +76,6 @@ public class RestaurantTest {
         assertThat(meal.servedDishes()).isEqualTo(4);
         assertThat(meal.cookingDuration()).isEqualTo(15);
     }
-
 
     /**
      * recipe for a Pizza is
@@ -96,8 +94,8 @@ public class RestaurantTest {
      * Regarding baking :
      *   oven have unlimited capacity multiple dishes can be baked at the same time
      */
-    @Ignore
     @Test
+    @Ignore("Ignored because I haven't add implementation yet")
     public void shouldServeMixedOrders() throws UnavailableDishException {
         Restaurant restaurant = new Restaurant("1Kg Flour", "50 tomatoes", "sea salt", "6 balls Mozzarella", "olive oil", "water");
         Ticket ticket = restaurant.order("3 Tomato Mozzarella Salad").and("2 Pizza");
@@ -105,5 +103,4 @@ public class RestaurantTest {
         assertThat(meal.servedDishes()).isEqualTo(5);
         assertThat(meal.cookingDuration()).isEqualTo(27);
     }
-
 }

@@ -1,5 +1,8 @@
 ## Coding guidelines ##
-I have followed TDD to create the code for the restaurant challenge and precisely I have followed the bellow points :
+### Naming conventions: 
+- keyToValue for maps
+### TDD
+- I have followed TDD to create the code for the restaurant challenge and precisely I have followed the bellow points :
 
 * ### Test only one behavior per test ###
 

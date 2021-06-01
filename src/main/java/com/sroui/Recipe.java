@@ -1,20 +1,21 @@
 package com.sroui;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.sroui.stock.StockItem;
+
+import java.util.*;
 
 public class Recipe {
     private final String name;
-    private final Map<String, Integer> ingredientToAmountMap;
+    private final List<StockItem> ingredients;
     private int preparationTimeInMinutes;
 
     public Recipe(String name) {
         this.name = name;
-        this.ingredientToAmountMap = new HashMap<>();
+        this.ingredients = new ArrayList<>();
     }
 
-    public void addIngredient(String ingredient, int amount) {
-        ingredientToAmountMap.put(ingredient, amount);
+    public void addIngredient(StockItem ingredient) {
+        ingredients.add(ingredient);
     }
 
     public String getName() {
@@ -29,7 +30,7 @@ public class Recipe {
         this.preparationTimeInMinutes = preparationTimeInMinutes;
     }
 
-    public Map<String, Integer> getIngredientToAmountMap(){
-        return new HashMap<>(ingredientToAmountMap);
+    public List<StockItem> getIngredients(){
+        return ingredients;
     }
 }
