@@ -1,7 +1,6 @@
 package com.sroui.stock;
 
 import static com.sroui.utils.TextUtils.isBlank;
-import static com.sroui.utils.TextUtils.isNumeric;
 
 public class StockItem {
     public static final int UNLIMITED_AMOUNT = -1;
@@ -36,10 +35,12 @@ public class StockItem {
         return Character.isDigit(ch);
     }
 
+    // Todo: Demeter law violation because it expose internals of StockItem
     public Integer getAmount() {
         return amount;
     }
 
+    // Todo: Demeter law violation because it expose internals of StockItem
     public String getName() {
         return name;
     }

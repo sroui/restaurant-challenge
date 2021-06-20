@@ -75,6 +75,7 @@ public class Stock {
 
     private boolean containsEnoughItemAmount(StockItem item) throws ItemOutOfStockException {
         int askedAmount = item.getAmount();
+
         int existingAmount = getAmountOf(item.getName());
         return  askedAmount == UNLIMITED_AMOUNT || existingAmount - askedAmount >= 0;
     }
@@ -85,6 +86,7 @@ public class Stock {
 
     public int getAmountOf(String itemName) throws ItemOutOfStockException {
         throwExceptionIfItemDoesNotExist(itemName);
+
         return nameToItem.get(itemName.toLowerCase()).getAmount();
     }
 }

@@ -30,6 +30,7 @@ public class Recipe {
         this.preparationTimeInMinutes = preparationTimeInMinutes;
     }
 
+    // todo Demeter law violation because it exposes its internals by exposing the ingredients
     public List<StockItem> getIngredients(){
         return ingredients;
     }
