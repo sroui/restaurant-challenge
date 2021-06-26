@@ -1,6 +1,6 @@
-package com.sroui.exceptions;
+package com.sroui.restaurant.exceptions;
 
-public class UnavailableDishException extends Exception {
+public class UnavailableDishException extends RestaurantException {
     public UnavailableDishException(String message, Throwable cause) {
         super(message, cause);
     }

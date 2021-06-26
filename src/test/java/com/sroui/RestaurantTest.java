@@ -1,13 +1,16 @@
 package com.sroui;
 
-import com.sroui.exceptions.UnavailableDishException;
-import com.sroui.stock.exceptions.ItemOutOfStockException;
+import com.sroui.restaurant.Restaurant;
+import com.sroui.restaurant.exceptions.UnavailableDishException;
+import com.sroui.restaurant.meal.Meal;
+import com.sroui.restaurant.meal.Ticket;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static com.sroui.stock.StockItem.UNLIMITED_AMOUNT;
+import static com.sroui.restaurant.stock.Stock.ITEM_UNLIMITED_AMOUNT;
 import static org.fest.assertions.Assertions.assertThat;
 
+// TODO use unchecked exceptions instead of checked exception
 /*recipe of Tomato Mozzarella Salad is
      *
      * 1 ball of Mozzarella
@@ -22,7 +25,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class RestaurantTest {
 
     @Test
-    public void shouldReturnStockAmountOfEachIngredient() throws ItemOutOfStockException {
+    public void shouldReturnStockAmountOfEachIngredient() {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "pepper");
 
         Double ballsMozzarellaAmount = restaurant.getStockAmountOf("balls Mozzarella");
@@ -32,12 +35,12 @@ public class RestaurantTest {
 
         assertThat(ballsMozzarellaAmount).isEqualTo(6);
         assertThat(tomatoesAmount).isEqualTo(20);
-        assertThat(oliveOilAmount).isEqualTo(UNLIMITED_AMOUNT);
-        assertThat(pepperAmount).isEqualTo(UNLIMITED_AMOUNT);
+        assertThat(oliveOilAmount).isEqualTo(ITEM_UNLIMITED_AMOUNT);
+        assertThat(pepperAmount).isEqualTo(ITEM_UNLIMITED_AMOUNT);
     }
 
     @Test
-    public void shouldServeTomatoMozzarellaSalad() throws UnavailableDishException {
+    public void shouldServeTomatoMozzarellaSalad() {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "2 tomatoes", "olive oil", "pepper");
 
         Ticket ticket = restaurant.order("1 Tomato Mozzarella Salad");
@@ -52,7 +55,7 @@ public class RestaurantTest {
      */
 // Allowed modification zone starts here
     @Test(expected = UnavailableDishException.class)
-    public void shouldFailWhenOutOfStock() throws UnavailableDishException {
+    public void shouldFailWhenOutOfStock() {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "pepper");
 
         restaurant.order("4 Tomato Mozzarella Salad");
@@ -69,7 +72,7 @@ public class RestaurantTest {
      */
     @Test
     @Ignore("Ignored because I haven't add implementation yet")
-    public void shouldCookFasterWhenDoingMultipleInstanceOfTheSameDish() throws UnavailableDishException {
+    public void shouldCookFasterWhenDoingMultipleInstanceOfTheSameDish() {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "sea salt");
         Ticket ticket = restaurant.order("4 Tomato Mozzarella Salad");
         Meal meal = restaurant.retrieveMealFor(ticket);
@@ -96,7 +99,7 @@ public class RestaurantTest {
      */
     @Test
     @Ignore("Ignored because I haven't add implementation yet")
-    public void shouldServeMixedOrders() throws UnavailableDishException {
+    public void shouldServeMixedOrders() {
         Restaurant restaurant = new Restaurant("1Kg Flour", "50 tomatoes", "sea salt", "6 balls Mozzarella", "olive oil", "water");
         Ticket ticket = restaurant.order("3 Tomato Mozzarella Salad").and("2 Pizza");
         Meal meal = restaurant.retrieveMealFor(ticket);
