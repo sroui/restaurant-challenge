@@ -53,7 +53,6 @@ public class RestaurantTest {
     /**
      * write a test to ensure that when a recipe require out of stocks ingredients we receive an UnavailableDishException (unchecked)
      */
-// Allowed modification zone starts here
     @Test(expected = UnavailableDishException.class)
     public void shouldFailWhenOutOfStock() {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "pepper");
@@ -62,7 +61,6 @@ public class RestaurantTest {
         restaurant.order("2 Tomato Mozzarella Salad");
         restaurant.order("1 Tomato Mozzarella Salad");
     }
-// Allowed modification zone ends here
 
     /**
      * when cooking more than one dish of the same type :
@@ -71,7 +69,6 @@ public class RestaurantTest {
      * here : first = 6 ; 2nd = 3 ; 3rd = 3 ; 4th = 3 => 15 minutes
      */
     @Test
-    @Ignore("Ignored because I haven't add implementation yet")
     public void shouldCookFasterWhenDoingMultipleInstanceOfTheSameDish() {
         Restaurant restaurant = new Restaurant("6 balls Mozzarella", "20 tomatoes", "olive oil", "sea salt");
         Ticket ticket = restaurant.order("4 Tomato Mozzarella Salad");

@@ -25,6 +25,12 @@ public class Recipe {
     }
 
     public int getPreparationTimeInMinutes(int dishCount) {
-        return  dishCount * preparationTimeInMinutes;
+        if (dishCount == 1) {
+            return preparationTimeInMinutes;
+        } else if (dishCount > 1) {
+            return getPreparationTimeInMinutes(--dishCount) + preparationTimeInMinutes/2 ;
+        } else {
+            throw new IllegalStateException("Dish count should be a positive number!");
+        }
     }
 }
